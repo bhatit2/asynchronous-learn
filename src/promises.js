@@ -30,12 +30,33 @@ function getUsers(url){
     })
 }
 
+function mockErr(){
+    return new Promise((resolve, reject)=>{
+        setTimeout(()=>reject("mocked err"), 500);
+    })
+}
+
 
 function getDataAll(){
     let promise1 = getPosts(apiUrl1);
     let promise2 = getUsers(apiUrl2);
     return Promise.all([promise1, promise2]);
 }
+
+/**
+ * Rejection scenario for Promise.all
+ */
+function getDataAllError(){
+    let promise1 = getPosts(apiUrl1);
+    let promise2 = getUsers(apiUrl2);
+    let promise3 = mockErr();
+    return Promise.all([
+        promise1.catch(err=> err), 
+        promise2.catch(err=> err),
+        promise3.catch(err=> err)
+    ]);
+}
+
 
 function getDataRace(){
     let promise1 = getPosts(apiUrl1);

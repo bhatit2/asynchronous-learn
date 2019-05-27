@@ -14,6 +14,11 @@ async function handleRace(){
     console.log("from handle race ", result);
 }
 
+async function handleErr(){
+    let result = await getDataAllError();
+    console.log("Results from error scenario");
+    console.log(result);
+}
 /**
  * Callback example 
  * In JavaScript, functions are objects. Because of this, functions can take functions as arguments, 
@@ -23,3 +28,4 @@ async function handleRace(){
 
 handleData();
 handleRace();
+handleErr();
